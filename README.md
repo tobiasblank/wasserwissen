@@ -23,3 +23,14 @@ Nach jeder Bewertung wird zunächst lokal gesichert, anschließend online über 
 
 ## Erweiterte Offline-Bewertung
 Erkennt Teilaspekte, Synonyme, Zahlen, Rechtsgrundlagen, mögliche Verneinungswidersprüche. Keine KI und keine verlässliche Prüfung der fachlichen Korrektheit. Die Selbstbewertung bleibt maßgeblich.
+
+## Entwicklung und Prüfung
+
+Architektur, priorisierte Risiken und Zielstruktur: [Analysebericht](docs/ANALYSE.md).
+Mit Node.js 20 oder neuer `npm test` ausführen. Keine Installation von Paketen erforderlich.
+Tests verwenden ausschließlich synthetische Daten und simulierte GitHub-Antworten.
+Die CI führt dieselben Tests bei Push und Pull Request aus.
+
+Das Buch-Icon erhält eine versionierte Apple-Touch-URL. Bereits installierte iOS-Icons
+können weiterhin alt bleiben. Vor jeder Neuinstallation den Lernstand als JSON sichern
+und den Inhalt prüfen; das Entfernen einer PWA kann lokale Daten löschen.
