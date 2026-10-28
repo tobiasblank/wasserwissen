@@ -1,11 +1,25 @@
-# Wasserwissen – GitHub Pages PWA
+# Wasserwissen PWA mit GitHub-Lernstand
 
-Alle Dateien und den Ordner `icons` in das **öffentliche** GitHub-Repository `tobiasblank/wasserwissen` hochladen. Die Startdatei muss im Repository-Hauptverzeichnis **`index.html`** heißen. GitHub Pages: Settings → Pages → Deploy from a branch → `main` → `/(root)`.
+## Dateien hochladen
+Alle Dateien und den Ordner `icons/` ins **öffentliche** Repository `tobiasblank/wasserwissen` hochladen (Root, `main`). Keine Tokens oder Lernstände ins öffentliche Repository hochladen.
 
-Adresse: https://tobiasblank.github.io/wasserwissen/
+## Privaten Datenspeicher einrichten
+GitHub → Neues Repository `wasserwissen-lernstand` → **Private** → README aktivieren.
+Unter Settings → Developer settings → Personal access tokens → Fine-grained tokens einen Token mit **Repository access: Only select repositories → wasserwissen-lernstand** und **Repository permissions: Contents → Read and write** erstellen. Token sicher aufbewahren, niemals an andere senden oder in den Code einfügen.
 
-Auf dem iPhone in **Safari** öffnen → Teilen → **Zum Home-Bildschirm**. Einmal bei Internetverbindung vollständig öffnen; anschließend funktioniert der Trainer auch offline. Das Gerät muss die Website dabei tatsächlich laden und den Service Worker installieren können.
+## Verbinden
+PWA öffnen → unten Abschnitt `GitHub-Lernstand` → Token eingeben → `Verbinden & abgleichen`. Standardmäßig bleibt der Token nur für die Browser-Sitzung erhalten; die Checkbox `Token auf diesem Gerät behalten` speichert ihn im lokalen Browserspeicher (praktischer, aber bei kompromittiertem Browser unsicher). iOS kann die Token-Eingabe ggf. per Passwortmanager erleichtern, **keine native Face-ID-Anmeldung**.
 
-**Wichtig:** Der Lernstand bleibt zurzeit lokal auf jedem Gerät gespeichert. Die GitHub-Synchronisierung ist **noch nicht eingebaut**. Zum Übertragen weiter die eingebaute JSON-Export-/Import-Funktion nutzen. Der Lernstand kann durch Löschen der Website-Daten verloren gehen.
+## Synchronisation
+Nach jeder Bewertung wird zunächst lokal gesichert, anschließend online über die GitHub Contents API abgeglichen. Beim Start (sofern verbunden), nach Rückkehr in die App und nach Netzrückkehr erfolgt ebenfalls ein Abgleich. Gleichzeitige Änderungen werden für jede Frage anhand des letzten Bewertungszeitpunkts zusammengeführt. Das ist keine vollständige Ereignishistorie: Bewertungen derselben Frage auf zwei Geräten können kollidieren; der neuere Stand gewinnt. Manuelle JSON-Sicherung weiterhin möglich.
 
-Bei Aktualisierungen `CACHE` in `sw.js` auf z.B. `wasserwissen-pwa-v2` erhöhen, damit Offline-Dateien neu eingerichtet werden.
+## Hinweise
+- GitHub-Pages-Repository öffentlich, Lernstand-Repository privat.
+- Die API-Synchronisierung benötigt Internet; Lernen funktioniert offline.
+- Bei einem iPhone-PWA-Update ggf. App mit Internet öffnen und neu laden, damit der Service Worker die neue Version zwischenspeichert.
+- Bei gemeinsam genutzten Geräten besser keine dauerhafte Token-Speicherung wählen.
+- GitHub-Tokens können ablaufen oder widerrufen werden; bei Fehler erneut verbinden.
+
+
+## Erweiterte Offline-Bewertung
+Erkennt Teilaspekte, Synonyme, Zahlen, Rechtsgrundlagen, mögliche Verneinungswidersprüche. Keine KI und keine verlässliche Prüfung der fachlichen Korrektheit. Die Selbstbewertung bleibt maßgeblich.
